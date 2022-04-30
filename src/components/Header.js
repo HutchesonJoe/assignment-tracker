@@ -1,9 +1,13 @@
+import { NavLink } from 'react-router-dom'
 
 function Header(){
   return (
-    <div className="header">
+    <NavLink to = "./">
+      <div className="header">
       Assignment Tracker
-    </div>
+      </div>
+    </NavLink>
+    
   )
 }
 

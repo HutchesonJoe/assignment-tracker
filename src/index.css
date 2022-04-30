@@ -14,7 +14,8 @@ code {
 
 .header {
   color: white;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: xxx-large;
+  font-family: Chalkduster, fantasy;
   background-color: red;
 }
 
@@ -34,5 +35,6 @@ a {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 30%
+  width: 30%;
+  font-family: Chalkduster, fantasy
 }

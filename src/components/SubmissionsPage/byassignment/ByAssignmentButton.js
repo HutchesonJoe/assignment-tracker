@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import EachSubByAssign from "../allsubmissions/AllSubCard"
+import EachSubByAssign from "./EachSubByAssign"
 
 function ByAssignmentButton({assignment}){
+  console.log(assignment)
   const [thisAssignSubs, setThisAssignSubs] = useState([])
   const [thisSubListOn, setSubThisSubListOn] = useState(false)
   
@@ -12,12 +13,12 @@ function ByAssignmentButton({assignment}){
     .then (r=>r.json())
     .then (data=>setThisAssignSubs(data))
   }
-  const assignSubList = thisAssignSubs.map((sub)=><EachSubByAssign submission={sub} key={sub.id}/>)
+  const assignSubList = thisAssignSubs.map((sub)=><EachSubByAssign submission={sub} key={sub.id} points_possible={assignment.points}/>)
 
   return(
     <div>
       <button onClick={handleClick}>{assignment.description}</button>
-      <div>{assignSubList}</div>
+      <div>{thisSubListOn ? assignSubList : ""}</div>
     </div>
   )
 }
