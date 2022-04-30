@@ -1,10 +1,25 @@
-import SubmissionCard from "../allsubmissions/AllSubCard"
+import EachSubByStudent from "./EachSubByStudent";
+import { useState } from 'react';
 
-function ByStudentButton({student, handleClick}){
-console.log(student)
-  
+function ByStudentButton({student}){
+  const [thisStudentSubs, setThisStudentSubs] = useState([])
+  const [subListOn, setSubListOn] = useState(false)
+ 
+  function handleClick(){
+    setSubListOn(!subListOn)
+    fetch(`http://localhost:9292/submissions_by_student/${student.id}`)
+    .then (r=>r.json())
+    .then (data=>setThisStudentSubs(data))
+  }
+
+  const subList = thisStudentSubs.map((sub)=><EachSubByStudent submission={sub} key={sub.id}/>)
+
   return(
-    <button onClick={handleClick(student)}>{student.last_name}, {student.first_name}</button>
+    <div>
+      <button onClick={handleClick}>{student.last_name}, {student.first_name}</button>
+      <div>{subListOn ? subList : ""}</div>
+    </div>
+    
   )
 }
 

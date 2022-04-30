@@ -4,24 +4,14 @@ import ByStudent from './bystudent/ByStudent'
 import ByAssignment from './byassignment/ByAssignment';
 
 function Submissions(){
-
- const [submissions, setSubmissions] = useState([])
- const [selection, setSelection] = useState(<AllSubmissions/>)
-
- useEffect(()=>{
-  fetch("http://localhost:9292/submissions")
-  .then (r => r.json())
-  .then (data=>setSubmissions(data))
- },[])
-
-  
+  const [selection, setSelection] = useState(<AllSubmissions/>)
   function handleSelect(e){
    if(e.target.value==="All Submissions"){
-     setSelection(<AllSubmissions submissions={submissions}/>)
+     setSelection(<AllSubmissions/>)
    } else if(e.target.value==="By Student"){
      setSelection(<ByStudent/>)
    } else if (e.target.value==="By Assignment"){
-     setSelection(<ByAssignment submissions={submissions}/>)
+     setSelection(<ByAssignment/>)
    }
   }
 

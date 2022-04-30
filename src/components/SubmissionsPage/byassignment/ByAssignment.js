@@ -1,16 +1,16 @@
 import { useState, useEffect} from 'react'
-import AssignSubCard from './AssignSubCard'
+import ByAssignmentButton from './ByAssignmentButton'
 
-function ByAssignment({submissions}){
-  // const [subsByAssign, setSubsByAssign] = useState([])
+function ByAssignment(){
+  const [subsByAssign, setSubsByAssign] = useState([])
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:9292/submissions_by_assignment")
-  //     .then(r=>r.json())
-  //     .then(data=>(setSubsByAssign(data)))
-  // },[])
-
-  const assignSubList = submissions.map((a)=><AssignSubCard assignment={a} key={a.id}/>)
+  useEffect(()=>{
+    fetch("http://localhost:9292/submissions_by_assignment")
+      .then(r=>r.json())
+      .then(data=>(setSubsByAssign(data)))
+  },[])
+  console.log(subsByAssign)
+  const assignSubList = subsByAssign.map((a)=><ByAssignmentButton assignment={a} key={a.id}/>)
  
   return(
     <div>{assignSubList}</div>

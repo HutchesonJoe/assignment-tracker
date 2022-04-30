@@ -12,20 +12,13 @@ function ByStudent(){
       .then(data=>(setSubsByStudent(data)))
   },[])
 
-  function handleClick(stud){
-    console.log("click")
-    const thisStudentSubs = stud.submissions.map((sub)=> <EachSubByStudent submission={sub}/>)
-    setStudentSubs(thisStudentSubs)
-  }
-  
-  const studentSubButtons = subsByStudent.map((stud)=> <ByStudentButton student={stud} key={stud.id} handleClick={handleClick}/>)
+  const studentSubButtons = subsByStudent.map((stud)=> <ByStudentButton student={stud} key={stud.id}/>)  
 
-  // return(
-  //   <div>
-  //     <div>{studentSubButtons}</div>
-  //     <div>{studentSubs}</div>
-  //   </div>
-  // )
+  return(
+    <div>
+      {studentSubButtons}
+    </div>
+  )
 }
 
 export default ByStudent;

@@ -10,7 +10,6 @@ function AllSubmissions(){
     .then (data=>setSubs(data))
   },[])
 
- 
     const currentSubmissionDisplay = subs.map((sub) => <AllSubCard submission={sub} key={sub.id}/>)
 
     return(
