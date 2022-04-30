@@ -1,12 +1,12 @@
 function AllSubCard({submission}){
- console.log(submission)
+  
   return (
-    <div className = "submission-card">
-      <h2>Submission ID: {submission.id}</h2>
-      <h2>{submission.assignment.description}</h2>
-      <h3>{submission.student_id}</h3>
-      <h3>Score: {submission.points_earned}/{submission.assignment.points}</h3>
-      <h3>{submission.teacher_notes}</h3>
+    <div className = "card">
+      <h3>Submission ID: {submission.id}</h3>
+      <h4>{submission.assignment.description}</h4>
+      <h4>Student ID:{submission.student_id}</h4>
+      <h4>Score: {submission.points_earned}/{submission.assignment.points}</h4>
+      <h4>{submission.teacher_notes}</h4>
     </div>
   )
 }
