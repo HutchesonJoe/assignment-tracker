@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function AssignmentForm(){
+function AssignmentForm({assigns, setAssigns}){
   const [desc, setDesc] = useState("")
   const [dueDate, setDueDate] = useState("")
   const [points, setPoints] = useState("")
@@ -9,8 +9,7 @@ function AssignmentForm(){
     due_date: dueDate,
     points: points
   }
-  console.log(assignmentData)
-  
+
   function handleSubmit(e){
     console.log(desc, dueDate, points)
     e.preventDefault()
@@ -22,7 +21,7 @@ function AssignmentForm(){
       body: JSON.stringify(assignmentData)
       })
         .then (r=>r.json())
-        .then (data=>console.log(data))
+        .then (data=>setAssigns([...assigns, data]))
   }
 
   return(
