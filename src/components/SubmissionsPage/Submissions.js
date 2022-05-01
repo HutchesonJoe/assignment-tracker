@@ -18,27 +18,19 @@ function Submissions(){
 
   return(
     <>
-      <p>Filter Submissions:</p>
-      <select onChange={handleSelect}>
-        <option>All Submissions</option>
-        <option>By Student</option>
-        <option>By Assignment</option>
-      </select>
+      <div className="filter-submissions">Select option:   
+        <select onChange={handleSelect} className="sub-option-form">
+        {/* <option>Record Submission</option> */}
+        <option>Review All/Edit Submissions</option>
+        <option>View Submssions By Student</option>
+        <option>View Submissions By Assignment</option>
+      </select></div>
+      
       <div className="submission-display-box">
         {selection}
         </div>
     </>
-    
-    // <div>
-    //   <p>View submissions:</p>
-    //   <form>
-    //   <select type="select" onChange={handleStudentSelect} value="assignment">
-       
-    //   </select>
-    //   </form>
-    //   <button value="student">By Student</button>
-    //   
-    // </div>
+  
   )
 }
 export default Submissions;

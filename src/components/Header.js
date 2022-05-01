@@ -4,7 +4,8 @@ function Header(){
   return (
     <NavLink to = "./">
       <div className="header">
-      Assignment Tracker
+      <p className="header-text">Assignment Tracker</p>
+      <p>An Online GradeBook</p>
       </div>
     </NavLink>
     

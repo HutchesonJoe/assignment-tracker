@@ -2,8 +2,8 @@
 
 function Home(){
   return (
-    <div>
-      This is home. 
+    <div className="about">
+      This application provides teachers with a convenient system to keep track of their students, assignments, and submissions. 
     </div>
   )
 }
