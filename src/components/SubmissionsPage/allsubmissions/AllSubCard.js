@@ -1,12 +1,15 @@
 import { isCompositeComponent } from "react-dom/test-utils";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditForm from './EditForm';
 
-function AllSubCard({submission}){
+function AllSubCard({submission, submissions, setSubs}){
   const[thisStudSubs, setThisStudSubs] = useState([{}])
-  const thisSub = thisStudSubs.find((sub)=> sub.id === submission.id)
+  const [formOn, setFormOn] = useState(false)
 
+  const thisSub = thisStudSubs.find((sub)=> sub.id === submission.id)
+  console.log(submission, submissions)
   function handleClick(){
+    setFormOn(!formOn)
     fetch(`http://localhost:9292/submissions_by_student/${submission.student_id}`)
     .then(r=> r.json())
     .then(data=>setThisStudSubs(data))
@@ -21,7 +24,7 @@ function AllSubCard({submission}){
       <div className="edit-delete-box">
         <button className="edit-option" onClick={handleClick}>Edit</button>
         <button className="delete-option">Delete</button>
-        {thisSub ? <EditForm thisSub={thisSub}/> : ""}
+        <div>{thisSub ? <EditForm thisSub={thisSub} setSubs={setSubs} submissions={submissions} /> : ""}</div>
       </div>
      
     </div>

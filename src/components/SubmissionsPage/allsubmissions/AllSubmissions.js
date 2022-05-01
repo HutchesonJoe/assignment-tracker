@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import AllSubCard from './AllSubCard'
 
 function AllSubmissions(){
+
   const[subs, setSubs] = useState([])
   
   useEffect(()=>{
@@ -10,7 +11,7 @@ function AllSubmissions(){
     .then (data=>setSubs(data))
   },[])
 
-    const currentSubmissionDisplay = subs.map((sub) => <AllSubCard submission={sub} key={sub.id}/>)
+    const currentSubmissionDisplay = subs.map((sub) => <AllSubCard submission={sub} submissions={subs} setSubs={setSubs} key={sub.id}/>)
 
     return(
       <div>{currentSubmissionDisplay}</div>
