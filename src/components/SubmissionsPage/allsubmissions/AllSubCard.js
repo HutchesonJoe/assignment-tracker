@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react';
 import EditForm from './EditForm';
 
 function AllSubCard({submission, submissions, setSubs, students}){
-  const[thisStudSubs, setThisStudSubs] = useState([{}])
+ 
+  const [thisStudSubs, setThisStudSubs] = useState([{}])
   const [formOn, setFormOn] = useState(false)
-  const [student, setStudent] = useState({})
  
   const thisSub = thisStudSubs.find((sub)=> sub.id === submission.id)
   
   const thisStudent = students.find((stud)=>submission.student_id === stud.id)
-
 
   function handleClick(){
     setFormOn(!formOn)

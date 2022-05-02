@@ -5,11 +5,11 @@ import ByAssignment from './byassignment/ByAssignment';
 
 function Submissions({students}){
   
-  const [selection, setSelection] = useState(<AllSubmissions students={students}/>)
+  const [selection, setSelection] = useState(<AllSubmissions/>)
 
   function handleSelect(e){
    if(e.target.value==="Review All/Edit Submissions"){
-     setSelection(<AllSubmissions students={students}/>)
+     setSelection(<AllSubmissions/>)
    } else if(e.target.value==="View Submssions By Student"){
      setSelection(<ByStudent/>)
    } else if (e.target.value==="View Submissions By Assignment"){
