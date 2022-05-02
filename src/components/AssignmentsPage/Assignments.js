@@ -16,7 +16,7 @@ function Assignments(){
     setAssignFormOn(!assignFormOn)
   }
     
-    const assignmentList = assigns.map((assign) => <AssignmentCard assignment={assign} key={assign.id}/>)
+    const assignmentList = assigns.map((assign) => <AssignmentCard assignment={assign} key={assign.id} setAssigns={setAssigns} assigns={assigns}/>)
   return (
     <div>
       <button onClick={handleClick}>Create Assignment</button>

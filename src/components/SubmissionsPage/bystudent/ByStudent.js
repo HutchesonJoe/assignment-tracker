@@ -4,8 +4,7 @@ import EachSubByStudent from './EachSubByStudent'
 function ByStudent(){
   
   const [subsByStudent, setSubsByStudent] = useState([])
-  const [studentSubs, setStudentSubs] = useState({})
-
+ 
   useEffect(()=>{
     fetch("http://localhost:9292/submissions_by_student")
       .then(r=>r.json())
