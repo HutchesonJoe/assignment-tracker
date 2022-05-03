@@ -26,10 +26,6 @@ function App() {
         <Route exact path="/assignments" element={<Assignments/>}></Route>
         <Route exact path="/submissions/*" element={<Submissions/>}></Route>
         <Route exact path="/" element={<Home/>}></Route>
-        <Route exact path="/" element={<AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>}></Route>
-        <Route exact path="/submissions/submissions-by-student" element={<ByStudent/>}></Route>
-        <Route exact path="/submissions-by-assignment" element={<ByAssignment/>}></Route>
-        <Route exact path="/record-submission" element={<RecordSubmission/>}></Route>
       </Routes>
     </div>
   );

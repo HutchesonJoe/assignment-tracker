@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 
-function RecordSubmission({students}){
+function RecordSubmission({submissions}){
   
   const [assignsForOptions, setAssignsForOptions] = useState([])
   const [description, setDesc] = useState("")

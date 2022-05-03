@@ -20,19 +20,38 @@ function Submissions(){
      setSelection("Review All/Edit Submissions")
    } else if(e.target.value==="View Submssions By Student"){
      setSelection("View Submssions By Student")
-   } else if (e.target.value==="View Submissions By Assignment"){
+    } else if (e.target.value==="View Submissions By Assignment"){
      setSelection("View Submissions By Assignment")
-   } else if (e.target.value==="Record Submission"){
+    } else if (e.target.value==="Record Submission"){
     setSelection("Record Submission")
     }
   }
-  // <AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>}
-  //     <ByStudent/>
-  //     <ByAssignment/>
-  //     <RecordSubmission/>
 
+  let renderChoice 
+  if (selection==="Review All/Edit Submissions"){
+      renderChoice = <AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>
+  } else if (selection==="View Submssions By Student"){
+      renderChoice = <ByStudent/>
+    } else if (selection==="View Submissions By Assignment"){
+    renderChoice = <ByAssignment/>
+    } else if (selection==="Record Submission"){
+    renderChoice = <RecordSubmission submissions={submissions} setSubmissions={setSubmissions}/>
+    }
+  
   return(
-    
+    <>
+      <div className="filter-submissions">Select option:   
+        <select onChange={handleSelect} className="sub-option-form">
+        <option>Review All/Edit Submissions</option>
+        <option>View Submssions By Student</option>
+        <option>View Submissions By Assignment</option>
+        <option>Record Submission</option>
+      </select></div>
+      
+      <div className="submission-display-box">
+        {renderChoice}
+      </div>
+    </>
       
   )
 }
