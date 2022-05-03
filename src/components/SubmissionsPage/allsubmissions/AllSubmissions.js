@@ -1,32 +1,24 @@
 import { useState, useEffect } from 'react'
-import AllSubCard from './AllSubCard'
+import EachSubmission from './EachSubmission'
 
-function AllSubmissions(){
-  const[subs, setSubs] = useState([])
-  const[students, setStudents] = useState([])
+function AllSubmissions({submissions, setSubmissions}){
+  // const[subs, setSubs] = useState([])
+  // // const[students, setStudents] = useState([])
 
-  //How do I fix this? Two fetches?
-  
-  useEffect(()=>{
-    fetch("http://localhost:9292/submissions")
-    .then (r => r.json())
-    .then (data=>setSubs(data))
-  },[])
+  // useEffect(()=>{
+  //   fetch("http://localhost:9292/submissions")
+  //   .then (r => r.json())
+  //   .then (data=>setSubs(data))
+  // },[])
 
-  useEffect(()=>{
-    fetch("http://localhost:9292/students")
-    .then (r => r.json())
-    .then (data => setStudents(data))
-  },[])
+  // useEffect(()=>{
+  //   fetch("http://localhost:9292/students")
+  //   .then (r => r.json())
+  //   .then (data => setStudents(data))
+  // },[])
       
-      // const theseSubs = []
-      // const theseSubsArrays = students.map(stud => stud.submissions)
-      // const theseSubsUnflat = theseSubsArrays.map(subs=> {
-      //   subs.map(obj=>theseSubs.push(obj))
-      // })
-      // setSubs(theseSubs)
      
-  const currentSubmissionDisplay = subs.map((sub) => <AllSubCard submission={sub}  students={students} submissions={subs} setSubs={setSubs} key={sub.id}/>)
+  const currentSubmissionDisplay = submissions.map((sub) => <EachSubmission submission={sub} submissions={submissions} key={sub.id} setSubmissions={setSubmissions}/>)
 
   return(
     <div>{currentSubmissionDisplay}</div>

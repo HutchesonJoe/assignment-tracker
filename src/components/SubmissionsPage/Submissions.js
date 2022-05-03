@@ -1,37 +1,39 @@
 import { useState, useEffect} from 'react';
 import AllSubmissions from './allsubmissions/AllSubmissions'
+import { Route, Routes } from 'react-router-dom'
 import ByStudent from './bystudent/ByStudent'
 import ByAssignment from './byassignment/ByAssignment';
+import RecordSubmission from './RecordSubmission'
+import { NavLink } from 'react-router-dom'
 
-function Submissions({students}){
+function Submissions(){
+  const [submissions, setSubmissions] = useState([])
+  const [selection, setSelection] = useState("Review All/Edit Submissions")
+
+  fetch("http://localhost:9292/submissions")
+   .then(r=>r.json())
+   .then(data=>setSubmissions(data))
+
   
-  const [selection, setSelection] = useState(<AllSubmissions/>)
-
   function handleSelect(e){
    if(e.target.value==="Review All/Edit Submissions"){
-     setSelection(<AllSubmissions/>)
+     setSelection("Review All/Edit Submissions")
    } else if(e.target.value==="View Submssions By Student"){
-     setSelection(<ByStudent/>)
+     setSelection("View Submssions By Student")
    } else if (e.target.value==="View Submissions By Assignment"){
-     setSelection(<ByAssignment/>)
-   }
+     setSelection("View Submissions By Assignment")
+   } else if (e.target.value==="Record Submission"){
+    setSelection("Record Submission")
+    }
   }
+  // <AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>}
+  //     <ByStudent/>
+  //     <ByAssignment/>
+  //     <RecordSubmission/>
 
   return(
-    <>
-      <div className="filter-submissions">Select option:   
-        <select onChange={handleSelect} className="sub-option-form">
-        {/* <option>Record Submission</option> */}
-        <option>Review All/Edit Submissions</option>
-        <option>View Submssions By Student</option>
-        <option>View Submissions By Assignment</option>
-      </select></div>
+    
       
-      <div className="submission-display-box">
-        {selection}
-        </div>
-    </>
-  
   )
 }
 export default Submissions;

@@ -21,10 +21,7 @@ function ByAssignmentButton({assignment}){
     } else {
       assignSubList = thisAssignSubs.map((sub)=><EachSubByAssign submission={sub} key={sub.id} points_possible={assignment.points}/>)
     }
-    console.log(assignSubList)
-
   
-
   return(
     <div>
       <button onClick={handleClick}>{assignment.description}</button>

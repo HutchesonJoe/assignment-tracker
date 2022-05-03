@@ -9,7 +9,7 @@ function ByAssignment(){
       .then(r=>r.json())
       .then(data=>(setSubsByAssign(data)))
   },[])
-  console.log(subsByAssign)
+
   const assignSubList = subsByAssign.map((a)=><ByAssignmentButton assignment={a} key={a.id}/>)
  
   return(
