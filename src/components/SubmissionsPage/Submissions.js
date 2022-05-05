@@ -34,7 +34,7 @@ function Submissions(){
     } else if (selection==="View Submissions By Assignment"){
     renderChoice = <ByAssignment/>
     } else if (selection==="Record Submission"){
-    renderChoice = <RecordSubmission submissions={submissions} setSubmissions={setSubmissions}/>
+    renderChoice = <RecordSubmission submissions={submissions} setSubmissions={setSubmissions} setSelection={setSelection}/>
     }
   
   return(

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import EditForm from './EditForm';
 
 function EachSubmission({submission, submissions, setSubmissions}){
-  console.log(submission)
+  
   const [formOn, setFormOn] = useState(false)
  
   function handleClick(){

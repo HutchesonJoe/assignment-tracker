@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 
-function RecordSubmission({submissions, setSubmissions}){
+function RecordSubmission({submissions, setSubmissions, setSelection}){
   
   const [assignments, setAssignments] = useState([])
   const [students, setStudents] = useState([])
@@ -50,6 +50,8 @@ function RecordSubmission({submissions, setSubmissions}){
 
   function handleSubmit(e){
     e.preventDefault()
+    setSelection("Review All/Edit Submissions")
+    
     fetch("http://localhost:9292/submissions", {
       method: "POST",
       headers: {
