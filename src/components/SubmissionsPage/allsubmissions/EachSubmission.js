@@ -3,24 +3,14 @@ import { useEffect, useState } from 'react';
 import EditForm from './EditForm';
 
 function EachSubmission({submission, submissions, setSubmissions}){
-  const thisAssign = submission.assignment
-  // console.log(thisAssign.description)
-  // const [thisStudSubs, setThisStudSubs] = useState([{}])
+  console.log(submission)
   const [formOn, setFormOn] = useState(false)
  
-  // const thisSub = thisStudSubs.find((sub)=> sub.id === submission.id)
-  
-  // const thisStudent = students.find((stud)=>submission.student_id === stud.id)
-
   function handleClick(){
     setFormOn(!formOn)
-    // fetch(`http://localhost:9292/submissions_by_student/${submission.student_id}`)
-    // .then(r=> r.json())
-    // .then(data=>setThisStudSubs(data))
   }
 
   function handleDelete(){
-   
     alert("Are you sure you want to delete this submission?")
     fetch(`http://localhost:9292/submissions/${submission.id}`,{
       method: "DELETE",
@@ -44,7 +34,7 @@ function EachSubmission({submission, submissions, setSubmissions}){
       <div className="edit-delete-box">
         <button className="edit-option" onClick={handleClick}>Edit</button>
         <button className="delete-option" onClick={handleDelete}>Delete</button>
-        <div>{formOn ? <EditForm submission={submission} setSubmissions={setSubmissions}/> : ""}</div>
+        <div>{formOn ? <EditForm submission={submission} submissions={submissions} setSubmissions={setSubmissions}/> : ""}</div>
       </div>
      
     </div>

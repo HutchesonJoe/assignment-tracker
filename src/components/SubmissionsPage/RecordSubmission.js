@@ -1,35 +1,41 @@
 import { useEffect, useState } from 'react';
 
 
-function RecordSubmission({submissions}){
+function RecordSubmission({submissions, setSubmissions}){
   
-  const [assignsForOptions, setAssignsForOptions] = useState([])
+  const [assignments, setAssignments] = useState([])
+  const [students, setStudents] = useState([])
   const [description, setDesc] = useState("")
   const [points, setPoints] = useState()
   const [notes, setNotes] = useState("")
-  const [studId, setStudId] = useState(students[0].id)
+  const [studId, setStudId] = useState()
   const [assId, setAssId] = useState()
-  // const [studSelect, setStudSelect] = useState()
-  // const [assignSelect, setAssignSelect] = useState()
   
   useEffect(()=>{
     fetch("http://localhost:9292/assignments")
       .then(r=>r.json())
-      .then(data=>setAssignsForOptions(data))
+      .then(data=>{
+        setAssignments(data)
+        setStudId(data[0].id)
+      })
   },[])
-  //How do I get these assignments without doing another fetch? Do I do this in another module? 
 
-  const studentByIdList = []
+  useEffect(()=>{
+    fetch("http://localhost:9292/students")
+      .then(r=>r.json())
+      .then(data=>{
+        setStudents(data)
+        setAssId(data[0].id)
+      })
+  },[])
+
   const studentOptions = students.map(stud=>{
-    // studentByIdList.push({[stud.id]: stud.last_name})
     return(
       <option key={stud.id} value={stud.id}>{stud.last_name}, {stud.first_name} </option>
     )
   })
 
-  const assignByIdList = []
-  const assignmentOptions = assignsForOptions.map(assign=>{
-    // assignByIdList.push({[assign.id]: assign.description})
+  const assignmentOptions = assignments.map(assign=>{
     return(
       <option key={assign.id} value={assign.id}>{assign.description}</option>
     )
@@ -52,25 +58,23 @@ function RecordSubmission({submissions}){
       body: JSON.stringify(submission)
     })
     .then (r=>r.json())
-    .then (data=>console.log(data))
+    .then (data=>setSubmissions([...submissions, data]))
   }
 
   function handleStudentSelect(e){
-    const student = students.find(stud=>parseInt(e.target.value)===stud.id)
-    // setStudId(student.id)
+    setStudId(e.target.value)
   }
 
   function handleAssignSelect(e){
-    const assignment = assignsForOptions.find(assign=>parseInt(e.target.value)===assign.id)
-    // setAssId(assignment.id)
+    setAssId(e.target.value)
   }
 
   return(
     <div>
       <form className="record-submission" onSubmit={handleSubmit}>
        
-        <select>{studentOptions}</select>
-        {/* <select onChange={handleAssignSelect}>{assignmentOptions}</select> */}
+        <select onChange={handleStudentSelect}>{studentOptions}</select>
+        <select onChange={handleAssignSelect}>{assignmentOptions}</select>
         <input type="text" placeholder="Enter points earned" className="form-input" onChange={(e)=>setPoints(e.target.value)}></input>
         <textarea type="text" placeholder="Enter notes" rows={5} className="form-input" onChange={(e)=>setNotes(e.target.value)}></textarea>
         <button>Submit</button>
