@@ -34,7 +34,7 @@ function EachSubmission({submission, submissions, setSubmissions}){
       <div className="edit-delete-box">
         <button className="edit-option" onClick={handleClick}>Edit</button>
         <button className="delete-option" onClick={handleDelete}>Delete</button>
-        <div>{formOn ? <EditForm submission={submission} submissions={submissions} setSubmissions={setSubmissions}/> : ""}</div>
+        <div>{formOn ? <EditForm setFormOn={setFormOn} formOn={formOn} submission={submission} submissions={submissions} setSubmissions={setSubmissions}/> : ""}</div>
       </div>
      
     </div>

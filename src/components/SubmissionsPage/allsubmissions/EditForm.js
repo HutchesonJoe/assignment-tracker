@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-function EditForm({submission, submissions, setSubmissions}){
-  const [newScore, setNewScore] = useState()
-  const [newNotes, setNewNotes] = useState()
+function EditForm({submission, submissions, setSubmissions, setFormOn, formOn}){
+  const [newScore, setNewScore] = useState(submission.points_earned)
+  const [newNotes, setNewNotes] = useState(submission.teacher_notes)
   console.log(submission)
   let newScoreInt = (parseInt(newScore))
   let patchData = {
@@ -10,13 +10,12 @@ function EditForm({submission, submissions, setSubmissions}){
     teacher_notes: newNotes
   } 
   
-  console.log(submission.points_earned, submission.teacher_notes)
   function handleSubmit(e){
     e.preventDefault()
+    setFormOn(!formOn)
     if (newScore===null){
       setNewScore(submission.points_earned)
-    }
-
+    } 
     if (newNotes===null){
       setNewNotes(submission.teacher_notes)
     }
@@ -32,11 +31,8 @@ function EditForm({submission, submissions, setSubmissions}){
       body: JSON.stringify(patchData)
     })
       .then (r=>r.json())
-      //this is not working. : (
       .then (data=> {
-        filteredSubs.splice(subIndex, 1, data)
-        // const newSubs = submissions.splice(subIndex, 0, data)
-        //setSubmissions(filteredSubs.splice(subIndex, 0, data))
+        filteredSubs.splice(subIndex, 0, data)
         setSubmissions(filteredSubs)
       })
     
