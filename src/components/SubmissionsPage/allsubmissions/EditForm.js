@@ -3,7 +3,7 @@ import { useState } from 'react';
 function EditForm({submission, submissions, setSubmissions, setFormOn, formOn}){
   const [newScore, setNewScore] = useState(submission.points_earned)
   const [newNotes, setNewNotes] = useState(submission.teacher_notes)
-  console.log(submission)
+   
   let newScoreInt = (parseInt(newScore))
   let patchData = {
     points_earned: newScoreInt,

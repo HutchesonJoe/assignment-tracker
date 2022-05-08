@@ -35,7 +35,7 @@ function StudentCard({student}){
     <div className="card">
       <h3>ID# {student.id}: {student.last_name}, {student.first_name}</h3>
       <h4>{student.grade_level}, GPA: {student.gpa}</h4>
-      <h4 className={passing}>Current Grade: {student.current_grade} ({letter_grade})</h4>
+      <h4 className={passing}>Current Grade: {student.current_grade ? student.current_grade : "No submissions."} ({student.current_grade ? letter_grade : "N/A"})</h4>
       <h4>Contact email: {student.email}</h4>
     </div>
   )

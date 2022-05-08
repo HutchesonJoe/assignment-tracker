@@ -40,7 +40,7 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
 
   const assignmentOptions = assignments.map(assign=>{
     return(
-      <option key={assign.id} value={assign.id}>{assign.description}</option>
+      <option key={assign.id} value={assign.id}>{assign.description}, {assign.points} points</option>
     )
   })
 
@@ -55,7 +55,6 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
   function handleSubmit(e){
     e.preventDefault()
     navigate(0)
-    //setSelection("Review All/Edit Submissions")
     
     if (points===null){
       setPoints(0)

@@ -1,8 +1,7 @@
 import { useState, useEffect} from 'react';
 import AllSubmissions from './allsubmissions/AllSubmissions'
-import ByStudent from './bystudent/ByStudent'
-import ByAssignment from './byassignment/ByAssignment';
 import RecordSubmission from './RecordSubmission'
+
 
 function Submissions(){
   const [submissions, setSubmissions] = useState([])
@@ -20,49 +19,20 @@ function Submissions(){
   },[])
   
   function handleSelect(e){
-   if(e.target.value==="Review All/Edit Submissions"){
-     setSelection("Review All/Edit Submissions")
-   } else if(e.target.value==="View Submssions By Student"){
-     setSelection("View Submssions By Student")
-    } else if (e.target.value==="View Submissions By Assignment"){
-     setSelection("View Submissions By Assignment")
-    } else if (e.target.value==="Record Submission"){
+   if(e.target.value==="Review/Edit Submissions"){
+     setSelection("Review/Edit Submissions")
+   }  else if (e.target.value==="Record Submission"){
     setSelection("Record Submission")
     }
   } 
 
   let renderChoice 
   if (selection==="Review/Edit Submissions"){
-      renderChoice = <AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>
+      renderChoice = <AllSubmissions submissions={submissions} setSubmissions={setSubmissions} getAllSubmissions={getAllSubmissions}/>
   } 
     else if (selection==="Record Submission"){
-    renderChoice = <RecordSubmission submissions={submissions} setSubmissions={setSubmissions} setSelection={setSelection}/>
-  }
-  
-  const unique = (value, index, self) => {  
-    return self.indexOf(value) === index
-  }
- 
-  const studentList = submissions.map((sub)=> <option key={sub.id} value={sub.student_id}>{sub.student.last_name}, {sub.student.first_name} - {sub.assignment.description}</option>) 
-
-  const assignList = submissions.map((sub) => <option key={sub.id}>{sub.assignment.description} - {sub.student.last_name}, {sub.student.first_name}</option>)
-
-  function handleStudentSelect(e){
-    if (e.target.value==="By Student"){
-      getAllSubmissions()
-    } else {
-      const thisStudentSubs = submissions.filter(sub=>sub.student_id===parseInt(e.target.value))
-    setSubmissions(thisStudentSubs)
-    }
-  }
-
-  function handleAssignmentSelect(e){
-    if (e.target.value==="By Assignment"){
-      getAllSubmissions()
-    } else {
-      const thisAssignSubs = submissions.filter(sub=>sub.assignment.description===e.target.value)
-      setSubmissions(thisAssignSubs)
-    }
+    renderChoice = 
+    <RecordSubmission submissions={submissions} setSubmissions={setSubmissions} setSelection={setSelection}/>
   }
   
   return(
@@ -74,18 +44,6 @@ function Submissions(){
       </select></div>
       
       <div>
-        <select className = "filter-select" onChange={handleStudentSelect}>
-          <option>By Student</option>
-          {studentList}
-        </select>
-
-        <select className = "filter-select" onChange={handleAssignmentSelect}>
-          <option>By Assignment</option>
-        {assignList}
-        </select>
-
-        <button onClick={()=>getAllSubmissions()}>Reset Filters</button>
-
         {renderChoice}
       </div>
     </>

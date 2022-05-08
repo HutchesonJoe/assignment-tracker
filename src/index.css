@@ -172,3 +172,8 @@ input{
 .filter-select{
   width: 400px;
 }
+
+.class-info{
+  font-size: larger;
+  font-weight: bold;
+}
