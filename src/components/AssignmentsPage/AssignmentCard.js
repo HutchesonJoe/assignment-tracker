@@ -1,19 +1,20 @@
 function AssignmentCard({assignment, assigns, setAssigns}){
 
   function handleDelete(){
-    alert("Are you sure you want to delete this assignment?")
-    fetch(`http://localhost:9292/assignments/${assignment.id}`,{
-      method: "DELETE",
-      headers: { 
-        'Content-Type' : 'application/json'
-      }
-    })
-    .then (r=>r.json())
-    .then ((data)=>{
-      const newAssigns = assigns.filter(assign => data.id !== assign.id)
-      setAssigns(newAssigns)
-    })
-
+    const deleteConfirm = window.confirm("Are you sure you want to delete this assignment?")
+    if (deleteConfirm){
+      fetch(`http://localhost:9292/assignments/${assignment.id}`,{
+        method: "DELETE",
+        headers: { 
+          'Content-Type' : 'application/json'
+        }
+      })
+      .then (r=>r.json())
+      .then ((data)=>{
+        const newAssigns = assigns.filter(assign => data.id !== assign.id)
+        setAssigns(newAssigns)
+      })
+    } 
   }
   return(
     <div className="card">

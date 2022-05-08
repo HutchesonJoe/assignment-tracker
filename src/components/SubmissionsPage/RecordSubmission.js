@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 
 function RecordSubmission({submissions, setSubmissions, setSelection}){
   
   const [assignments, setAssignments] = useState([])
   const [students, setStudents] = useState([])
-  const [description, setDesc] = useState("")
-  const [points, setPoints] = useState()
+  const [points, setPoints] = useState(0)
   const [notes, setNotes] = useState("")
   const [studId, setStudId] = useState()
   const [assId, setAssId] = useState()
-  
+
+  const navigate = useNavigate()
+ 
+
   useEffect(()=>{
     fetch("http://localhost:9292/assignments")
       .then(r=>r.json())
       .then(data=>{
         setAssignments(data)
-        setStudId(data[0].id)
+        setAssId(data[0].id)
       })
   },[])
 
@@ -25,7 +28,7 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
       .then(r=>r.json())
       .then(data=>{
         setStudents(data)
-        setAssId(data[0].id)
+        setStudId(data[0].id)
       })
   },[])
 
@@ -41,16 +44,32 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
     )
   })
 
-  const submission = {
-    points_earned: points,
-    teacher_notes: notes,
-    assignment_id: assId,
-    student_id: studId
+  function handleStudentSelect(e){
+    setStudId(e.target.value)
+  }
+
+  function handleAssignSelect(e){
+    setAssId(e.target.value)
   }
 
   function handleSubmit(e){
     e.preventDefault()
-    setSelection("Review All/Edit Submissions")
+    navigate(0)
+    //setSelection("Review All/Edit Submissions")
+    
+    if (points===null){
+      setPoints(0)
+    } 
+    if (notes===null){
+      setNotes("(No notes.)")
+    }
+    
+    const submission = {
+      points_earned: points,
+      teacher_notes: notes,
+      assignment_id: assId,
+      student_id: studId
+    }
     
     fetch("http://localhost:9292/submissions", {
       method: "POST",
@@ -63,14 +82,6 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
     .then (data=>setSubmissions([...submissions, data]))
   }
 
-  function handleStudentSelect(e){
-    setStudId(e.target.value)
-  }
-
-  function handleAssignSelect(e){
-    setAssId(e.target.value)
-  }
-
   return(
     <div>
       <form className="record-submission" onSubmit={handleSubmit}>
@@ -80,7 +91,9 @@ function RecordSubmission({submissions, setSubmissions, setSelection}){
         <input type="text" placeholder="Enter points earned" className="form-input" onChange={(e)=>setPoints(e.target.value)}></input>
         <textarea type="text" placeholder="Enter notes" rows={5} className="form-input" onChange={(e)=>setNotes(e.target.value)}></textarea>
         <button>Submit</button>
+
       </form>
+      
     </div>
   )
 }

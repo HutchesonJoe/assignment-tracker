@@ -1,19 +1,13 @@
-function EachSubByAssign({submission, points_possible}){
-  console.log(submission)
 
-  function handleDelete(){
-
-  }
+function EachSubByAssign({submission, pointsPossible}){
 
   return(
-    <div className="card">
-      <h3>{submission.student.last_name}, {submission.student.first_name}</h3>
-      <h4>{submission.points_earned}/{points_possible}</h4>
-      <h4>{submission.teacher_notes}</h4>
-      <button>Delete Assignment</button>
+    <div className = "card">
+      <h3>Student ID #{submission.student.id}: {submission.student.last_name}, {submission.student.first_name}</h3>
+      <h4>Score: {submission.points_earned}/{pointsPossible}</h4>
+      <h4>Notes: {submission.teacher_notes}</h4>
     </div>
   )
-
 }
 
 export default EachSubByAssign;

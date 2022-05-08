@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-function AssignmentForm({assigns, setAssigns}){
+function AssignmentForm({assigns, setAssigns, setAssignFormOn, assignFormOn}){
   const [desc, setDesc] = useState("")
   const [dueDate, setDueDate] = useState("")
   const [points, setPoints] = useState("")
+  
 
   const assignmentData = { description: desc,
     due_date: dueDate,
@@ -11,8 +12,8 @@ function AssignmentForm({assigns, setAssigns}){
   }
 
   function handleSubmit(e){
-    console.log(desc, dueDate, points)
     e.preventDefault()
+    setAssignFormOn(!assignFormOn)
     fetch("http://localhost:9292/assignments", {
       method: "POST",
       headers: { 

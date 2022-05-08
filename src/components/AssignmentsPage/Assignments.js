@@ -20,7 +20,7 @@ function Assignments(){
   return (
     <div>
       <button onClick={handleClick}>Create Assignment</button>
-      <div>{assignFormOn ? <AssignmentForm assigns={assigns} setAssigns={setAssigns}/> : ""}</div>
+      <div>{assignFormOn ? <AssignmentForm assigns={assigns} setAssigns={setAssigns} setAssignFormOn={setAssignFormOn} assignFormOn={assignFormOn}/> : ""}</div>
       <div>{assignmentList}</div>
       
       
