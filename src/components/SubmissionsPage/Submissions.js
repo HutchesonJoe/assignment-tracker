@@ -6,12 +6,17 @@ import RecordSubmission from './RecordSubmission'
 
 function Submissions(){
   const [submissions, setSubmissions] = useState([])
-  const [selection, setSelection] = useState("Review All/Edit Submissions")
-
-  useEffect(()=>{
+  const [selection, setSelection] = useState("Review/Edit Submissions")
+  const [sortSelection, setSortSelection] = useState("All Submissions")
+  
+  function getAllSubmissions(){
     fetch("http://localhost:9292/submissions")
     .then(r=>r.json())
     .then(data=>setSubmissions(data))
+  }
+
+  useEffect(()=>{
+    getAllSubmissions()
   },[])
   
   function handleSelect(e){
@@ -24,30 +29,63 @@ function Submissions(){
     } else if (e.target.value==="Record Submission"){
     setSelection("Record Submission")
     }
-  }
+  } 
 
   let renderChoice 
-  if (selection==="Review All/Edit Submissions"){
+  if (selection==="Review/Edit Submissions"){
       renderChoice = <AllSubmissions submissions={submissions} setSubmissions={setSubmissions}/>
-  } else if (selection==="View Submssions By Student"){
-      renderChoice = <ByStudent/>
-    } else if (selection==="View Submissions By Assignment"){
-    renderChoice = <ByAssignment submissions={submissions}/>
-    } else if (selection==="Record Submission"){
+  } 
+    else if (selection==="Record Submission"){
     renderChoice = <RecordSubmission submissions={submissions} setSubmissions={setSubmissions} setSelection={setSelection}/>
+  }
+  
+  const unique = (value, index, self) => {  
+    return self.indexOf(value) === index
+  }
+ 
+  const studentList = submissions.map((sub)=> <option key={sub.id} value={sub.student_id}>{sub.student.last_name}, {sub.student.first_name} - {sub.assignment.description}</option>) 
+
+  const assignList = submissions.map((sub) => <option key={sub.id}>{sub.assignment.description} - {sub.student.last_name}, {sub.student.first_name}</option>)
+
+  function handleStudentSelect(e){
+    if (e.target.value==="By Student"){
+      getAllSubmissions()
+    } else {
+      const thisStudentSubs = submissions.filter(sub=>sub.student_id===parseInt(e.target.value))
+    setSubmissions(thisStudentSubs)
     }
+  }
+
+  function handleAssignmentSelect(e){
+    if (e.target.value==="By Assignment"){
+      getAllSubmissions()
+    } else {
+      const thisAssignSubs = submissions.filter(sub=>sub.assignment.description===e.target.value)
+      setSubmissions(thisAssignSubs)
+    }
+  }
   
   return(
     <>
       <div className="filter-submissions">Select option:   
         <select onChange={handleSelect} className="sub-option-form">
-        <option>Review All/Edit Submissions</option>
-        <option>View Submssions By Student</option>
-        <option>View Submissions By Assignment</option>
+        <option>Review/Edit Submissions</option>
         <option>Record Submission</option>
       </select></div>
       
-      <div className="submission-display-box">
+      <div>
+        <select className = "filter-select" onChange={handleStudentSelect}>
+          <option>By Student</option>
+          {studentList}
+        </select>
+
+        <select className = "filter-select" onChange={handleAssignmentSelect}>
+          <option>By Assignment</option>
+        {assignList}
+        </select>
+
+        <button onClick={()=>getAllSubmissions()}>Reset Filters</button>
+
         {renderChoice}
       </div>
     </>

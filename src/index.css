@@ -168,3 +168,7 @@ input{
 .failing{
   color: red;
 }
+
+.filter-select{
+  width: 400px;
+}
