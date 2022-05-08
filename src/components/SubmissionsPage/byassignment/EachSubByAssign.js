@@ -1,6 +1,6 @@
 
 function EachSubByAssign({submission, pointsPossible}){
-
+ console.log(submission.assignment.points_possible)
   return(
     <div className = "card">
       <h3>Student ID #{submission.student.id}: {submission.student.last_name}, {submission.student.first_name}</h3>
